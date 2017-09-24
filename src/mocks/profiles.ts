@@ -1,4 +1,3 @@
-
 import {Profile} from "../models/profile";
 
 const profileList: Profile[] = [

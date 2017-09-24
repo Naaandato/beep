@@ -4,12 +4,7 @@ import {Account} from "../../models/account";
 import {LoginResponse} from "../../models/login-res";
 import {AuthProvider} from "../../providers/auth/auth.service";
 
-/**
- * Generated class for the LoginFormComponent component.
- *
- * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
- * for more info on Angular Components.
- */
+
 @Component({
   selector: 'login-form',
   templateUrl: 'login-form.component.html'

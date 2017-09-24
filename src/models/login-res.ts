@@ -1,5 +1,5 @@
-export interface LoginResponse {
 
+export interface LoginResponse {
   result?: {
     email?: string;
     uid?: string;
