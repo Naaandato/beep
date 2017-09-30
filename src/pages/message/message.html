@@ -15,11 +15,11 @@
 
 <ion-content padding>
 
-  <chat-message *ngFor="let message of messageList; let index = index" [chatMessage]="message" [chatIndex]="index"></chat-message>
+  <chat-message *ngFor="let message of messageList | async" [chatMessage]="message" [userId]="userId"></chat-message>
 
 
 </ion-content>
 
 <ion-footer>
-  <send-message-box></send-message-box>
+  <send-message-box (sendMessage)="sendMessage($event)" ></send-message-box>
 </ion-footer>

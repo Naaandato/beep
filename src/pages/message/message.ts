@@ -2,14 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Profile} from "../../models/profile";
 import {Message} from "../../models/message";
-import {MESSAGE_LIST} from "../../mocks/messages";
+import {AuthProvider} from "../../providers/auth/auth.service";
+import {DataProvider} from "../../providers/data/data.service";
+import {ChatProvider} from "../../providers/chat/chat.service";
+import {Observable} from "rxjs/Observable";
 
-/**
- * Generated class for the MessagePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,16 +15,51 @@ import {MESSAGE_LIST} from "../../mocks/messages";
 })
 export class MessagePage {
 
-  selectedUser: Profile;
+  selectedProfile: Profile;
 
-  messageList: Message[];
+  messageList: Observable<Message[]>;
+  userId: string;
+  userProfile: Profile;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.messageList = MESSAGE_LIST;
+  constructor(private chat: ChatProvider, private auth: AuthProvider, private data: DataProvider, public navCtrl: NavController, public navParams: NavParams) {
+    //this.messageList = MESSAGE_LIST;
   }
 
   ionViewWillLoad() {
-     this.selectedUser = this.navParams.get('profile');
+     this.selectedProfile = this.navParams.get('profile');
+
+     this.data.getAuthenticatedUserProfile().subscribe(profile => {
+       this.userProfile = profile;
+       this.userId = profile.$key;
+     });
+
+     this.messageList = this.chat.getChats(this.selectedProfile.$key);
   }
+
+  async sendMessage(content: string) {
+
+    try {
+      const message: Message = {
+        userToId: this.selectedProfile.$key,
+        userToProfile: {
+          firstName: this.selectedProfile.firstName,
+          lastName: this.selectedProfile.lastName
+        },
+        userFromId: this.userId,
+        userFromProfile: {
+          firstName: this.userProfile.firstName,
+          lastName: this.userProfile.lastName
+        },
+        content: content
+      };
+
+      await this.chat.sendChat(message);
+
+    }catch (e){
+      console.error(e);
+    }
+  }
+
+
 
 }

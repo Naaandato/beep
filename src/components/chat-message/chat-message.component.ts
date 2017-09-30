@@ -14,7 +14,8 @@ import {Message} from "../../models/message";
 export class ChatMessageComponent {
 
   @Input() chatMessage: Message;
-  @Input() chatIndex: Number;
+
+  @Input() userId: string;
 
   constructor() {
   }

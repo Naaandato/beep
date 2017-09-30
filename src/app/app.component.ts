@@ -16,7 +16,6 @@ export class MyApp {
     this.auth.getAuthenticatedUser().subscribe(auth => {
       !auth ?
         this.rootPage = 'LoginPage' :
-        //this.rootPage = 'TabsPage';
         this.rootPage = 'TabsPage';
     });
 
