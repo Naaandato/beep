@@ -3,17 +3,16 @@ import {AngularFireAuth} from "angularfire2/auth";
 import {Account} from "../../models/account";
 import {LoginResponse} from "../../models/login-res";
 
-/*
-  Generated class for the AuthProvider provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class AuthProvider {
 
   constructor(private auth: AngularFireAuth) {
     console.log('Hello AuthProvider Provider');
+  }
+
+  getAuthenticatedUser(){
+    return this.auth.authState;
   }
 
   async createUserWithEmailAndPassword(account: Account){
@@ -42,6 +41,10 @@ export class AuthProvider {
       };
 
     }
+  }
+
+  signOut() {
+    this.auth.auth.signOut();
   }
 
 }

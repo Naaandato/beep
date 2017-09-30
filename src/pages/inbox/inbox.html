@@ -3,6 +3,11 @@
 
   <ion-navbar>
     <ion-title>Inbox</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="navigateToPage('SearchUserPage')">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -10,14 +15,16 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-item *ngFor="let message of messageList">
-      <ion-avatar item-left>
-        <img [src]="message.user.avatar" alt="Avatar">
-      </ion-avatar>
-      <h2>{{message.user.firstName}} {{message.user.lastName}}</h2>
-      <p>{{message.lastMessage}}</p>
-    </ion-item>
-  </ion-list>
+  <online-users></online-users>
+
+  <!--<ion-list>-->
+    <!--<ion-item *ngFor="let message of messageList">-->
+      <!--<ion-avatar item-left>-->
+        <!--<img [src]="message.user.avatar" alt="Avatar">-->
+      <!--</ion-avatar>-->
+      <!--<h2>{{message.user.firstName}} {{message.user.lastName}}</h2>-->
+      <!--<p>{{message.lastMessage}}</p>-->
+    <!--</ion-item>-->
+  <!--</ion-list>-->
 
 </ion-content>

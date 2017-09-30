@@ -26,4 +26,8 @@ export class InboxPage {
     console.log(this.messageList);
   }
 
+  navigateToPage(pageName :string){
+    pageName === 'TabsPage' ? this.navCtrl.setRoot(pageName) : this.navCtrl.push(pageName);
+  }
+
 }
